@@ -7,20 +7,33 @@ import moment from 'moment';
 class App extends React.Component {
   constructor(){
     super();
-    this.state={ fromDate:moment(), toDate:moment() };
+    this.state={
+      fromDate:moment(),
+      toDate:moment(), 
+      clicktype:null //1 for fromdate, 2 for todate   
+    };
   }
 
   onSelect=(e)=>{
-    console.log('this is a date being selected');
+    //console.log('this is a date being selected');
+    if (
+      this.state.clicktype===1){ 
+        //set from date 
+        console.log('this is a from date', this.state.fromDate._d);
+      } else { 
+        //set to date 
+        console.log('this is a to date');
+      }
   }
 
   onClickFromDate=(e)=>{
-    console.log('this is a from date');
-    // this.setState(console.log('this is a from date'));
+    console.log('this is a from date input');
+    this.setState({ clicktype:1})
   }
 
   onClickToDate=(e)=>{
-    console.log('this is a to date');
+    console.log('this is a to date input');
+    this.setState({ clicktype:2})
   }
 
   render() {
@@ -32,7 +45,7 @@ class App extends React.Component {
           </header>
           <label> From <input type="text" onClick={this.onClickFromDate} value={this.state.fromDate.format('DD/MM/YYYY')} /> </label>
           <label> To <input type="text" onClick={this.onClickToDate} value={this.state.toDate.format('DD/MM/YYYY')} /> </label>
-          <Calendar date={moment("23/10/2015", "DD/MM/YYYY")} onSelect={this.onSelect} />
+          <Calendar date={moment("23/03/2018", "DD/MM/YYYY")} onSelect={this.onSelect} />
         </div>
       </div>
     )
